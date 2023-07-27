@@ -1,25 +1,33 @@
-import { useState } from "react";
-import "./App.css";
-import HomeComponents from "./paginas/homeComponents/homeComponents";
-import HomeHooks from "./paginas/homeHooks/homeHooks";
-import HomeRenders from "./paginas/homeRenders/homeRenders";
+import React from 'react';
+import './App.css';
+
+import Navbar from './components/navbar/NavBar';
+import Footer from './components/footer/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/cadastro/Login';
+import Cadastro from './pages/cadastro/Cadastro';
+import Home from './pages/home/Home';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 function App() {
-
-  const[valor, setValor] = useState(0);
-  function handleClick(){
-    setValor(valor+1)
-  }
   return (
     <>
-    <HomeComponents title="Esse é o titulo" description="Essa é a descrição"/>
-    <p>O valor é: {valor}</p>
-    <button onClick={handleClick}>Clique em mim!</button>
-    <HomeHooks/>
-    <HomeRenders/>
+    <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <div className='min-h-[80vh]'>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/home" element={<Home />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+        </AuthProvider>
     </>
   );
 }
-
 export default App;
