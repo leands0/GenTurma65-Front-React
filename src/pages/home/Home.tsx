@@ -1,6 +1,6 @@
 import React from 'react';
 import homeLogo from '../../assets/background.jpg'
-import './Home.css';
+
 
 function Home() {
     return (
